@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="input-group mb-3 w-50 mt-3 mx-auto">
-            <input type="text" class="form-control" placeholder="New Todo" v-model="todo.item">
+        <div class="input-group mb-3  col-sm-12 col-md-12 col-lg-6 mt-3 mx-auto">
+            <input type="text" class="form-control" placeholder="New Todo" v-model="todo.item" v-on:keyup.enter="addTodo">
             <div class="input-group-append">
                 <button class="btn btn-outline-success btn-sm" type="button" @click="addTodo()">Add</button>
             </div>

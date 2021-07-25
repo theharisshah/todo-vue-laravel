@@ -19,7 +19,7 @@ class TodoController extends Controller
      */
     public function index(Request $request): AnonymousResourceCollection
     {
-        $todos = Todo::all();
+        $todos = Todo::paginate(5);
         return TodoResource::collection($todos);
     }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="container d-flex flex-column justify-content-center">
+    <div class="container d-flex flex-column flex-sm-columm flex-md-column justify-content-center">
         <h1 class="text-center">Todo List</h1>
         <formTodo></formTodo>
     </div>

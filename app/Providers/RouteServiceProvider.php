@@ -2,10 +2,7 @@
 
 namespace Todo\Providers;
 
-use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
@@ -26,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-     protected $namespace = 'Todo\Http\Controllers';
+    protected $namespace = 'Todo\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -35,11 +32,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->configureRateLimiting();
+//        $this->configureRateLimiting();
 
         $this->routes(function () {
             Route::middleware('api')
-                ->namespace($this->namespace."\Api")
+                ->namespace($this->namespace . "\Api")
                 ->domain(config('app.api_url'))
                 ->group(base_path('routes/api.php'));
 
@@ -56,8 +53,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
+//        RateLimiter::for('api', function (Request $request) {
+//            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+//        });
     }
 }
