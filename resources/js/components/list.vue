@@ -1,5 +1,10 @@
 <template>
-    <div class="container col-md-12 col-sm-12 col-lg-6">
+    <div class="container col-md-12 col-sm-12 col-lg-6 text-center" v-if="loading">
+        <div class="spinner-border text-success" role="status" >
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="container col-md-12 col-sm-12 col-lg-6" v-else>
         <ul class="list-group">
             <li v-for="todo in todos.data" :key="todo.id" class="list-group-item">
                 <item :todo="todo" v-on:reload-todos="getTodos(page)"></item>
@@ -19,6 +24,7 @@
             return {
                 todos: {},
                 page : 1,
+                loading: false
             }
         },
         components : {
@@ -32,6 +38,7 @@
                 if(typeof this.page !== 'undefined'){
                     url = `/v1/todos?page=${page}`;
                 }
+                this.loading = true;
                  axios.get(url).then(response => {
                    if(response.status === 200){
                        if(response.data.data.length > 0){
@@ -49,7 +56,9 @@
                            }
                        }
                    }
-                });
+                }).finally(()=> {
+                    this.loading = false;
+                 });
             }
         },
         created() {
